@@ -35,13 +35,13 @@
 
 ### **커밋 타입**
 
-- `태그/이슈번호-설명` 형식으로 커밋 메시지를 작성합니다.
-- 태그는 영어를 쓰고 대문자로 작성합니다.
+- `태그: 설명` 형식으로 커밋 메시지를 작성합니다.
+- 태그는 영어로로 작성합니다.
 
 예시 >
 
 ```
-  [FEAT]/#3-bookmark
+ feat: 카카오 로그인 구현
 
 ```
 
@@ -70,13 +70,13 @@ WorkFlow : **Gitflow Workflow**
 ### ❗️ branch naming convention
 
 - develop
-- feature/issue_number-도메인-(필요하다면 기능명까지)
-- fix/issue_number-도메인-(필요하다면 기능명까지)
-- hotfix/issue_number - Short Description
+- feature/issue_number/도메인-(필요하다면 기능명까지)
+- fix/issue_number/도메인-(필요하다면 기능명까지)
+- hotfix/issue_number/Short Description
 
 예시 >
 
 ```
-  feature/#3-post
+  feature/#3/동행 게시물 생성 api
 
 ```
