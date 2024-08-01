@@ -6,13 +6,36 @@ import UMC.TravelMate.domain.accompanypost.dto.response.AccompanyPostUpdateRespo
 import UMC.TravelMate.domain.accompanypost.entity.AccompanyPost;
 import org.springframework.data.domain.Page;
 
-public class AccompanyPostService {
-    //AccompanyPost createAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request);
-    //AccompanyPostUpdateResponse updateAccompanyPost(Long accompanyPostId, AccompanyPostRequest.AccompanyPostUpdateRequestDTO request);
-    //Long deleteAccompanyPost(Long accompamyPostId);
+import java.time.LocalDate;
 
-   // Page<AccompanyPostInquiryResponse> inquiryAccompanyPostPage(Integer page); // 모든 동행 게시글 조회
-    //Page<AccompanyPostInquiryResponse> inquiryAccompanyPostBySearch(String keyword, Integer page); // 동행 게시글 검색
-    //AccompanyPostInquiryResponse inquiryAccompanyPostById(Long accompanyPostId);
+public interface AccompanyPostService {
 
+    //동행게시글 생성
+    AccompanyPost createAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request);
+    
+    //동행게시글 삭제
+    Long deleteAccompanyPost(Long accompanyPostId);
+
+    //동행게시글 수정
+    AccompanyPostUpdateResponse updateAccompanyPost(Long accompanyPostId, AccompanyPostRequest.AccompanyPostUpdateRequestDTO request);
+
+    //모든 동행게시글 조회
+    Page<AccompanyPostInquiryResponse> inquiryAccompanyPostPage(Integer page);
+
+    // 여행 여정 조회
+    Page<AccompanyPostInquiryResponse> inquiryAccompanyPostByTravelPeriod(
+            LocalDate startDate,
+            LocalDate endDate,
+            String destination,
+            Integer page
+    );
+
+    // 최근 게시글 조회 -> 동행게시글 조회랑 비슷 (보류)
+    //Page<AccompanyPostInquiryResponse> inquiryAccompanyPostByRecent(Integer page);
+
+    // 조건에 맞는 게시글 조회 -> 후에 디테일 추가
+    Page<AccompanyPostInquiryResponse> inquiryAccompanyPostByKeyword(String keyword, Integer page);
+
+    // 조건에 맞는 게시글 조회 - 참가자 범위
+    //Page<AccompanyPostInquiryResponse> inquiryAccompanyPostByParticipantRange(Integer participants, Integer page);
 }

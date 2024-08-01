@@ -1,5 +1,6 @@
 package UMC.TravelMate.domain.accompanypost.entity;
 
+import UMC.TravelMate.domain.accompanypost.dto.request.AccompanyPostRequest;
 import UMC.TravelMate.domain.accompanypost.enums.AccompanionType;
 import UMC.TravelMate.domain.accompanypost.enums.Gender;
 import UMC.TravelMate.global.common.BaseEntity;
@@ -48,8 +49,23 @@ public class AccompanyPost extends BaseEntity {
 
     private Boolean isConfirmed;
 
-
-
+    public void update(String title, String destination, String content, LocalDate startAt, LocalDate endAt, String language, 
+                       Integer minAge, Integer maxAge, Gender gender, AccompanionType accompanionType, Integer minParticipants, Integer maxParticipants) {
+        
+        this.title = title;
+        this.destination = destination;
+        this.content = content;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.language = language;
+        this.minAge = minAge;
+        this.maxAge = maxAge;
+        this.gender = gender;
+        this.accompanionType = accompanionType;
+        this.minParticipants = minParticipants;
+        this.maxParticipants = maxParticipants;
+        updated();
+    }
 
     //member ID 추가
     //@ManytoOne(fetch = FetchType.LAZY)
