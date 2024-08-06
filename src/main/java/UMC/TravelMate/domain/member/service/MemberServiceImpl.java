@@ -90,7 +90,6 @@ public class MemberServiceImpl implements MemberService {
                 .role(Role.USER)
                 .build();
 
-        // 회원 저장
         memberRepository.save(member);
 
         return memberMapper.toMemberSignUpResponse(member.getId(), email, password);
