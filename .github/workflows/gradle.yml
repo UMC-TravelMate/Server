@@ -5,7 +5,7 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Java CI with Gradle # workflow 이름
 
 on:
   push:
@@ -46,15 +46,15 @@ jobs:
       run: |
           chmod +x ./gradlew
           ./gradlew clean build -x test
-          
-  ## 도커 이미지 빌드 후 도커허브에 push하기
+
+    ## 도커 이미지 빌드 후 도커허브에 push하기
     - name: web docker build and push
       run: |
-        docker login -u ${{ secrets.hig26827463 }} -p ${{ secrets.!ig26827463 }}
-        docker build -t ${{ secrets.hig26827463/travelmate }} .
-        docker push ${{ secrets.hig26827463/travelmate }}
-
-  ## 서버에 접속하여 도커 이미지를 pull 받고 실행하기
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -t ${{ secrets.DOCKER_REPO }} .
+        docker push ${{ secrets.DOCKER_REPO }}
+         
+    ## 서버에 접속하여 도커 이미지를 pull 받고 실행하기
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v0.1.6
       with:
@@ -63,6 +63,6 @@ jobs:
         key: ${{ secrets.KEY }}
         port: 22
         script: |
-          sudo docker image rm ${{ secrets.hig26827463/travelmate }}
-          sudo docker pull ${{ secrets.hig26827463/travelmate }}
-          sudo docker run -d -p 8080:8080 ${{ secrets.hig26827463/travelmate }}
+          sudo docker image rm ${{ secrets.DOCKER_REPO }}
+          sudo docker pull ${{ secrets.DOCKER_REPO }}
+          sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_REPO }}
