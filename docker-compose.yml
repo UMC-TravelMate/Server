@@ -1,0 +1,10 @@
+version: "3" # 버전 지정
+
+services: # 컨테이너 설정
+  backend:
+    container_name: travelmate-backend
+    image: hig26827463/travelmate
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
