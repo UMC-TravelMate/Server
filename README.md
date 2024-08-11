@@ -1,4 +1,4 @@
-# umark-server
+# travelmate-server
 
 ### ✈ API 명세서
 
