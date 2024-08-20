@@ -15,7 +15,6 @@ public class AccompanyPostResponse {
     @AllArgsConstructor
     public static class AccompanyPostCreateResponseDTO {
         Long accompanyPostId;
-        LocalDate createdAt;
     }
 
     @Builder

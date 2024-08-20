@@ -3,6 +3,7 @@ package UMC.TravelMate.domain.accompanypost.service;
 import UMC.TravelMate.domain.accompanypost.converter.AccompanyPostConverter;
 import UMC.TravelMate.domain.accompanypost.dto.request.AccompanyPostRequest;
 import UMC.TravelMate.domain.accompanypost.dto.response.AccompanyPostInquiryResponse;
+import UMC.TravelMate.domain.accompanypost.dto.response.AccompanyPostResponse;
 import UMC.TravelMate.domain.accompanypost.dto.response.AccompanyPostUpdateResponse;
 import UMC.TravelMate.domain.accompanypost.entity.AccompanyPost;
 import UMC.TravelMate.domain.accompanypost.repository.AccompanyPostRepository;
@@ -29,11 +30,11 @@ public class AccompanyPostServiceImpl implements AccompanyPostService {
     // 동행게시글 생성
     @Override
     @Transactional
-    public AccompanyPost createAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request){
+    public AccompanyPostResponse.AccompanyPostCreateResponseDTO createAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request){
         //member 관련 혹은 추가내용시 작성
-        AccompanyPost newAccompanyPost = AccompanyPostConverter.toAccompanyPost(request); // member 추가시 Converter 변환 필요
-
-        return accompanyPostRepository.save(newAccompanyPost);
+        AccompanyPost newAccompanyPost = accompanyPostConverter.toAccompanyPost(request); // member 추가시 Converter 변환 필요
+        accompanyPostRepository.save(newAccompanyPost);
+        return new AccompanyPostResponse.AccompanyPostCreateResponseDTO(newAccompanyPost.getId());
     }
 
     // 동행게시글 삭제

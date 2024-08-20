@@ -25,9 +25,8 @@ public class AccompanyPostController {
     private final AccompanyPostService accompanyPostService;
 
     @PostMapping("/create")
-    public BaseResponse<AccompanyPostResponse.AccompanyPostCreateResponseDTO> createAccompanyPost(@RequestBody @Valid AccompanyPostRequest.AccompanyPostCreateRequestDTO requset) {
-        AccompanyPost newAccompanyPost = accompanyPostService.createAccompanyPost(requset);
-        return BaseResponse.onSuccess(AccompanyPostConverter.toAccompanyPostCreateResponseDTO(newAccompanyPost));
+    public BaseResponse<AccompanyPostResponse.AccompanyPostCreateResponseDTO> createAccompanyPost(@RequestBody AccompanyPostRequest.AccompanyPostCreateRequestDTO requset) {
+        return BaseResponse.onSuccess(accompanyPostService.createAccompanyPost(requset));
     }
 
     @DeleteMapping("/delete/{accompanyPostId}")

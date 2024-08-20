@@ -2,6 +2,7 @@ package UMC.TravelMate.domain.accompanypost.service;
 
 import UMC.TravelMate.domain.accompanypost.dto.request.AccompanyPostRequest;
 import UMC.TravelMate.domain.accompanypost.dto.response.AccompanyPostInquiryResponse;
+import UMC.TravelMate.domain.accompanypost.dto.response.AccompanyPostResponse;
 import UMC.TravelMate.domain.accompanypost.dto.response.AccompanyPostUpdateResponse;
 import UMC.TravelMate.domain.accompanypost.entity.AccompanyPost;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 public interface AccompanyPostService {
 
     //동행게시글 생성
-    AccompanyPost createAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request);
+    AccompanyPostResponse.AccompanyPostCreateResponseDTO createAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request);
     
     //동행게시글 삭제
     Long deleteAccompanyPost(Long accompanyPostId);

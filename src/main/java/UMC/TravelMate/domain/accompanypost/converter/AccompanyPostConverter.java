@@ -25,11 +25,10 @@ public class AccompanyPostConverter {
 
         return AccompanyPostResponse.AccompanyPostCreateResponseDTO.builder()
                 .accompanyPostId(accompanyPost.getId())
-                .createdAt(LocalDate.now()) //t
                 .build();
     }
     
-    public static AccompanyPost toAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request/* Member member*/){ //request로 받은 dto로 게시글 생성
+    public AccompanyPost toAccompanyPost(AccompanyPostRequest.AccompanyPostCreateRequestDTO request/* Member member*/){ //request로 받은 dto로 게시글 생성
         
         log.info("Content received in request: {}", request.getContent());
         return AccompanyPost.builder()
@@ -46,8 +45,6 @@ public class AccompanyPostConverter {
                 .minParticipants(request.getMinParticipants())
                 .maxParticipants(request.getMaxParticipants())
                 .build();
-
-
     }
 
     //동행게시글 삭제
