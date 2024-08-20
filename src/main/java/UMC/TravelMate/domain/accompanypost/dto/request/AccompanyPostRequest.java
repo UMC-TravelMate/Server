@@ -15,40 +15,18 @@ public class AccompanyPostRequest {
     public static class AccompanyPostCreateRequestDTO {
 
         @Size(max = 20) // 제목 20자 설정
-        @NotBlank
         private String title;
-
-        @NotBlank
         private String destination;
-
-        @NotBlank
         private String content;
-
-        @NotNull
         private LocalDate startAt;
-
-        @NotNull
         private LocalDate endAt;
-
-        @NotBlank
         private String language;
-
         @Size(min = 1)
         private Integer minAge;
-
-
         private Integer maxAge;
-
-        @NotNull
         private Gender gender;
-
-        @NotNull
         private AccompanionType accompanionType;
-
-        @NotNull
         private Integer minParticipants;
-
-        @NotNull
         private Integer maxParticipants;
     }
 
@@ -56,40 +34,31 @@ public class AccompanyPostRequest {
     public static class AccompanyPostUpdateRequestDTO {
 
         @Size(max = 20)
-        @NotBlank
         private String title;
 
-        @NotBlank
         private String destination;
 
-        @NotBlank
         private String content;
 
-        @NotNull
         private LocalDate startAt;
 
-        @NotNull
+
         private LocalDate endAt;
 
-        @NotBlank
         private String language;
 
-        @Size(min = 1)
+        //@Size(min = 1)
         private Integer minAge;
 
 
         private Integer maxAge;
 
-        @NotNull
         private Gender gender;
 
-        @NotNull
         private AccompanionType accompanionType;
 
-        @NotNull
         private Integer minParticipants;
 
-        @NotNull
         private Integer maxParticipants;
 
 
