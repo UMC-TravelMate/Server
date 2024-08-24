@@ -32,7 +32,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("http://3.39.102.140", "http://localhost:3000")); // 모든 도메인 허용
+        config.setAllowedOrigins(Arrays.asList("http://3.39.102.140", "http://localhost:3000", "http://localhost:5173" )); // 모든 도메인 허용
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 모든 HTTP 메소드 허용
         config.setAllowedHeaders(Arrays.asList("*")); // 모든 헤더 허용
         config.setAllowCredentials(true); // 자격 증명 허용
@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/v3/**", "/swagger-ui/**", "/accompanyposts/**",
-                                "/members/google", "/members/kakao", "/members/naver", "/members/signup", "/members/login", "/test/**").permitAll()
+                                "/members/**","/test/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
