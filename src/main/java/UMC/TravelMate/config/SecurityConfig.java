@@ -32,10 +32,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://3.39.102.140","http://localhost:5173")); // 특정 도메인 지정
-        configuration.addAllowedMethod("*"); // 모든 HTTP 메소드 허용
-        configuration.addAllowedHeader("*"); // 모든 헤더 허용
-        configuration.setAllowCredentials(true); // 크레덴셜 허용
+        configuration.setAllowedOrigins(Arrays.asList("http://3.39.102.140","http://localhost:3000", "http://localhost:5173")); // 특정 도메인 지정
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);
+        configuration.addExposedHeader("Some-Header"); // 클라이언트에 노출할 헤더 추가
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
