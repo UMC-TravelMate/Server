@@ -1,7 +1,10 @@
 package UMC.TravelMate.global.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,18 +12,27 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
     @Bean
-    public GroupedOpenApi publicApi() {     //public api로 모든 경로를 하나의 그룹으로 결성
-        return GroupedOpenApi.builder()
-                .group("TravelMate")    // 그룹이름 설정
-                .pathsToMatch("/**")    // 모든 경로 포함
-                .build();
+    public OpenAPI openAPI() {
+        final String securitySchemeName = "Bearer";
+
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList(securitySchemeName);
+
+        Components components = new Components()
+                .addSecuritySchemes(securitySchemeName, new SecurityScheme()
+                        .name(securitySchemeName)
+                        .type(SecurityScheme.Type.HTTP)
+                        .scheme("Bearer"));
+
+        return new OpenAPI()
+                .components(components)
+                .info(apiInfo())
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName));
     }
 
-    @Bean
-    public OpenAPI openAPI() {     // open api로 API문서의 기본정보 설정
-        return new OpenAPI()
-                .info(new Info()
-                        .title("TravelMate API")
-                        .version("1.0.0"));
+    private Info apiInfo() {
+        return new Info()
+                .title("Swagger for TravelMate")
+                .description("Springdoc을 사용한 Swagger UI for TravelMate")
+                .version("1.0.0");
     }
 }
