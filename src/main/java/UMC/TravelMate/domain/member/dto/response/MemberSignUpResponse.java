@@ -11,5 +11,4 @@ import java.util.List;
 public class MemberSignUpResponse {
     private Long id;
     private String email;
-    private String password;
 }

@@ -2,6 +2,7 @@ package UMC.TravelMate.domain.member.mapper;
 
 import UMC.TravelMate.config.jwt.JwtToken;
 import UMC.TravelMate.domain.member.dto.response.MemberLoginResponse;
+import UMC.TravelMate.domain.member.dto.response.MemberProfileResponse;
 import UMC.TravelMate.domain.member.dto.response.MemberSignUpResponse;
 import UMC.TravelMate.domain.member.entity.LoginType;
 import UMC.TravelMate.domain.member.entity.Member;
@@ -28,15 +29,21 @@ public class MemberMapper {
                 .build();
     }
 
-    public MemberSignUpResponse toMemberSignUpResponse(Long memberId, String email, String password){
+    public MemberSignUpResponse toMemberSignUpResponse(Long memberId, String email){
         return MemberSignUpResponse.builder()
                 .id(memberId)
                 .email(email)
-                .password(password)
                 .build();
     }
 
-
+    public MemberProfileResponse toMemberProfileResponse(Member member, int age){
+        return MemberProfileResponse.builder()
+                .name(member.getName())
+                .age(age)
+                .introduce(member.getIntroduce())
+                .gender(member.getGender())
+                .build();
+    }
 
 
 }

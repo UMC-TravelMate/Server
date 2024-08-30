@@ -7,6 +7,7 @@ import UMC.TravelMate.domain.member.client.KakaoMemberClient;
 import UMC.TravelMate.domain.member.client.NaverMemberClient;
 import UMC.TravelMate.domain.member.dto.request.MemberRequest;
 import UMC.TravelMate.domain.member.dto.response.MemberLoginResponse;
+import UMC.TravelMate.domain.member.dto.response.MemberProfileResponse;
 import UMC.TravelMate.domain.member.dto.response.MemberSignUpResponse;
 import UMC.TravelMate.domain.member.entity.LoginType;
 import UMC.TravelMate.domain.member.entity.Member;
@@ -23,6 +24,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,23 +79,28 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberSignUpResponse signUpMember(String email, String password) {
+    public MemberSignUpResponse signUpMember(MemberRequest.MemberSignUpDto request) {
 
-        Optional <Member> findMember = memberRepository.findByEmail(email);
+        Optional <Member> findMember = memberRepository.findByEmail(request.getEmail());
 
         if (findMember.isPresent()){
             throw new CustomApiException(ErrorCode.DUPLICATE_EMAIL);
         }
-
+        
+        //mapper로 바꾸기
         Member member = Member.builder()
-                .email(email)
-                .password(password)
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .name(request.getName())
+                .birth(request.getBirth())
+                .gender(request.getGender())
+                .introduce(request.getIntroduce())
                 .role(Role.USER)
                 .build();
 
         memberRepository.save(member);
 
-        return memberMapper.toMemberSignUpResponse(member.getId(), email, password);
+        return memberMapper.toMemberSignUpResponse(member.getId(), request.getEmail());
     }
 
     @Override
@@ -114,6 +122,17 @@ public class MemberServiceImpl implements MemberService {
         JwtToken jwtToken = jwtTokenProvider.generateToken(member.getId().toString());
 
         return memberMapper.toMemberLoginResponse(member.getId(), jwtToken);
+    }
+
+    @Override
+    @Transactional
+    public MemberProfileResponse getMemberProfile(){
+        Member member = authService.getLoginMember();
+
+        LocalDate currentDate = LocalDate.now();
+        int age = Period.between(member.getBirth(), currentDate).getYears();
+
+        return memberMapper.toMemberProfileResponse(member,age);
     }
 
 

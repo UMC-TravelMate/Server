@@ -2,6 +2,7 @@ package UMC.TravelMate.domain.member.controller;
 
 import UMC.TravelMate.domain.member.dto.request.MemberRequest;
 import UMC.TravelMate.domain.member.dto.response.MemberLoginResponse;
+import UMC.TravelMate.domain.member.dto.response.MemberProfileResponse;
 import UMC.TravelMate.domain.member.dto.response.MemberSignUpResponse;
 import UMC.TravelMate.domain.member.service.MemberService;
 import UMC.TravelMate.global.common.BaseResponse;
@@ -45,10 +46,14 @@ public class MemberController {
 
     @Operation(summary="이메일 회원가입")
     @PostMapping("/signup")
-    public BaseResponse<MemberSignUpResponse> signUpMember(@RequestBody MemberRequest.MemberSignUpDto memberSignUpDto) {
-        String email = memberSignUpDto.getEmail();
-        String password = memberSignUpDto.getPassword();
-
-        return BaseResponse.onSuccess(memberService.signUpMember(email, password));
+    public BaseResponse<MemberSignUpResponse> signUpMember(@RequestBody MemberRequest.MemberSignUpDto request) {
+        return BaseResponse.onSuccess(memberService.signUpMember(request));
     }
+
+    @Operation(summary="유저 프로필 조회")
+    @GetMapping("/profile")
+    public BaseResponse<MemberProfileResponse> getMemberProfile(){
+        return BaseResponse.onSuccess(memberService.getMemberProfile());
+    }
+
 }
